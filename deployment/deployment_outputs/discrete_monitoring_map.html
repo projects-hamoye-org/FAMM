@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a9000ad6ad78a8b9675993fb5bbb1d16 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_a9000ad6ad78a8b9675993fb5bbb1d16" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a9000ad6ad78a8b9675993fb5bbb1d16 = L.map(
+                "map_a9000ad6ad78a8b9675993fb5bbb1d16",
+                {
+                    center: [6.2, -1.7],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 9,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_d1cc12c766283af55b1f68c988751d88 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_d1cc12c766283af55b1f68c988751d88.addTo(map_a9000ad6ad78a8b9675993fb5bbb1d16);
+        
+    
+            var circle_marker_ee03e4c50bbe8b7306426c7c4e553d29 = L.circleMarker(
+                [6.8009653530120735, -1.5396225654524476],
+                {"bubblingMouseEvents": true, "color": "#1a9850", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a9850", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a9000ad6ad78a8b9675993fb5bbb1d16);
+        
+    
+        var popup_f4db7d8711d027312e5904bb10ad7081 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_446417ab9b11e15f899267b49f107779 = $(`<div id="html_446417ab9b11e15f899267b49f107779" style="width: 100.0%; height: 100.0%;"><b>District:</b> Kwabre East<br><b>Confidence:</b> 0.4567<br><b>Alert:</b> LOW</div>`)[0];
+                popup_f4db7d8711d027312e5904bb10ad7081.setContent(html_446417ab9b11e15f899267b49f107779);
+            
+        
+
+        circle_marker_ee03e4c50bbe8b7306426c7c4e553d29.bindPopup(popup_f4db7d8711d027312e5904bb10ad7081)
+        ;
+
+        
+    
+    
+            var circle_marker_ebc0c1e1ac3d9537b5e6b7b47897c799 = L.circleMarker(
+                [5.355037071693292, -1.0796851399832528],
+                {"bubblingMouseEvents": true, "color": "#1a9850", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a9850", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a9000ad6ad78a8b9675993fb5bbb1d16);
+        
+    
+        var popup_8d944c0213b1eaedff2ddbcf81d980fd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_60d85fbff50b9036d8f48c911e575f83 = $(`<div id="html_60d85fbff50b9036d8f48c911e575f83" style="width: 100.0%; height: 100.0%;"><b>District:</b> Mfantseman Municipal<br><b>Confidence:</b> 0.3009<br><b>Alert:</b> LOW</div>`)[0];
+                popup_8d944c0213b1eaedff2ddbcf81d980fd.setContent(html_60d85fbff50b9036d8f48c911e575f83);
+            
+        
+
+        circle_marker_ebc0c1e1ac3d9537b5e6b7b47897c799.bindPopup(popup_8d944c0213b1eaedff2ddbcf81d980fd)
+        ;
+
+        
+    
+    
+            var circle_marker_0de06ee66d4813c5c509887c7eaa4aa9 = L.circleMarker(
+                [5.173936710414797, -1.4591335159953385],
+                {"bubblingMouseEvents": true, "color": "#1a9850", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a9850", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a9000ad6ad78a8b9675993fb5bbb1d16);
+        
+    
+        var popup_1118eb139c6e1b8c619b9fa7deeb61bf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_016bc7eac24357346e3fc147bdb59cbe = $(`<div id="html_016bc7eac24357346e3fc147bdb59cbe" style="width: 100.0%; height: 100.0%;"><b>District:</b> Komenda-edina-eguafo-abirem Municipal<br><b>Confidence:</b> 0.3112<br><b>Alert:</b> LOW</div>`)[0];
+                popup_1118eb139c6e1b8c619b9fa7deeb61bf.setContent(html_016bc7eac24357346e3fc147bdb59cbe);
+            
+        
+
+        circle_marker_0de06ee66d4813c5c509887c7eaa4aa9.bindPopup(popup_1118eb139c6e1b8c619b9fa7deeb61bf)
+        ;
+
+        
+    
+</script>
+</html>
