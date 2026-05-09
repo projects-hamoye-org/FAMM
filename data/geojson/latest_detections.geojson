@@ -1,0 +1,866 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "generated": "2026-02-07T01:11:22.726549",
+    "generator": "FAMM Demo Data Generator v1.0",
+    "purpose": "Demo/Testing",
+    "total_features": 45
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.360878,
+          6.375424
+        ]
+      },
+      "properties": {
+        "confidence": 0.853,
+        "district": "Bibiani-Anhwiaso-Bekwai",
+        "region": "Western Region",
+        "date": "2026-01-19",
+        "area_ha": 2.5,
+        "tile_id": "S2A_TILE_20260119_751259",
+        "alert_level": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.651588,
+          6.286667
+        ]
+      },
+      "properties": {
+        "confidence": 0.891,
+        "district": "Obuasi",
+        "region": "Ashanti Region",
+        "date": "2026-01-27",
+        "area_ha": 1.7,
+        "tile_id": "S2A_TILE_20260127_103123",
+        "alert_level": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.87504,
+          6.177761
+        ]
+      },
+      "properties": {
+        "confidence": 0.837,
+        "district": "Adansi South",
+        "region": "Ashanti Region",
+        "date": "2026-01-14",
+        "area_ha": 1.3,
+        "tile_id": "S2A_TILE_20260114_907967",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.086258,
+          5.550524
+        ]
+      },
+      "properties": {
+        "confidence": 0.95,
+        "district": "Prestea-Huni Valley",
+        "region": "Western Region",
+        "date": "2026-01-27",
+        "area_ha": 2.3,
+        "tile_id": "S2A_TILE_20260127_769242",
+        "alert_level": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.021834,
+          6.409308
+        ]
+      },
+      "properties": {
+        "confidence": 0.969,
+        "district": "Amansie West",
+        "region": "Ashanti Region",
+        "date": "2026-01-21",
+        "area_ha": 2.3,
+        "tile_id": "S2A_TILE_20260121_839919",
+        "alert_level": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.94606,
+          6.452526
+        ]
+      },
+      "properties": {
+        "confidence": 0.867,
+        "district": "Amansie Central",
+        "region": "Ashanti Region",
+        "date": "2026-02-03",
+        "area_ha": 2.1,
+        "tile_id": "S2A_TILE_20260203_866770",
+        "alert_level": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.10198,
+          5.358001
+        ]
+      },
+      "properties": {
+        "confidence": 0.855,
+        "district": "Prestea-Huni Valley",
+        "region": "Western Region",
+        "date": "2026-02-04",
+        "area_ha": 2.3,
+        "tile_id": "S2A_TILE_20260204_137495",
+        "alert_level": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.903006,
+          5.296903
+        ]
+      },
+      "properties": {
+        "confidence": 0.798,
+        "district": "Tarkwa-Nsuaem",
+        "region": "Western Region",
+        "date": "2026-02-02",
+        "area_ha": 1.2,
+        "tile_id": "S2A_TILE_20260202_616173",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.128972,
+          5.686996
+        ]
+      },
+      "properties": {
+        "confidence": 0.871,
+        "district": "Wassa East",
+        "region": "Western Region",
+        "date": "2026-01-09",
+        "area_ha": 1.5,
+        "tile_id": "S2A_TILE_20260109_798954",
+        "alert_level": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.015562,
+          5.714262
+        ]
+      },
+      "properties": {
+        "confidence": 0.779,
+        "district": "Wassa East",
+        "region": "Western Region",
+        "date": "2026-02-04",
+        "area_ha": 2.4,
+        "tile_id": "S2A_TILE_20260204_617425",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.152348,
+          6.394716
+        ]
+      },
+      "properties": {
+        "confidence": 0.928,
+        "district": "Amansie West",
+        "region": "Ashanti Region",
+        "date": "2026-01-29",
+        "area_ha": 3.4,
+        "tile_id": "S2A_TILE_20260129_450724",
+        "alert_level": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.896499,
+          6.064799
+        ]
+      },
+      "properties": {
+        "confidence": 0.646,
+        "district": "Adansi South",
+        "region": "Ashanti Region",
+        "date": "2026-02-02",
+        "area_ha": 0.6,
+        "tile_id": "S2A_TILE_20260202_818100",
+        "alert_level": "LOW"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.057397,
+          5.47343
+        ]
+      },
+      "properties": {
+        "confidence": 0.717,
+        "district": "Prestea-Huni Valley",
+        "region": "Western Region",
+        "date": "2026-01-24",
+        "area_ha": 0.8,
+        "tile_id": "S2A_TILE_20260124_170859",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.205061,
+          5.532248
+        ]
+      },
+      "properties": {
+        "confidence": 0.799,
+        "district": "Prestea-Huni Valley",
+        "region": "Western Region",
+        "date": "2026-01-22",
+        "area_ha": 0.9,
+        "tile_id": "S2A_TILE_20260122_536522",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.348141,
+          6.368774
+        ]
+      },
+      "properties": {
+        "confidence": 0.792,
+        "district": "Bibiani-Anhwiaso-Bekwai",
+        "region": "Western Region",
+        "date": "2026-01-25",
+        "area_ha": 1.7,
+        "tile_id": "S2A_TILE_20260125_847039",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.852099,
+          6.48852
+        ]
+      },
+      "properties": {
+        "confidence": 0.744,
+        "district": "Amansie Central",
+        "region": "Ashanti Region",
+        "date": "2026-01-24",
+        "area_ha": 0.8,
+        "tile_id": "S2A_TILE_20260124_325585",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.623754,
+          5.894349
+        ]
+      },
+      "properties": {
+        "confidence": 0.881,
+        "district": "West Akim",
+        "region": "Eastern Region",
+        "date": "2026-01-31",
+        "area_ha": 1.3,
+        "tile_id": "S2A_TILE_20260131_304664",
+        "alert_level": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.992191,
+          5.729114
+        ]
+      },
+      "properties": {
+        "confidence": 0.712,
+        "district": "Wassa East",
+        "region": "Western Region",
+        "date": "2026-01-13",
+        "area_ha": 1.4,
+        "tile_id": "S2A_TILE_20260113_360599",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.791204,
+          6.092157
+        ]
+      },
+      "properties": {
+        "confidence": 0.686,
+        "district": "Adansi South",
+        "region": "Ashanti Region",
+        "date": "2026-02-03",
+        "area_ha": 1.4,
+        "tile_id": "S2A_TILE_20260203_821967",
+        "alert_level": "LOW"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.631322,
+          6.138433
+        ]
+      },
+      "properties": {
+        "confidence": 0.711,
+        "district": "Obuasi",
+        "region": "Ashanti Region",
+        "date": "2026-01-13",
+        "area_ha": 0.5,
+        "tile_id": "S2A_TILE_20260113_271429",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.998675,
+          5.656057
+        ]
+      },
+      "properties": {
+        "confidence": 0.816,
+        "district": "Wassa East",
+        "region": "Western Region",
+        "date": "2026-01-27",
+        "area_ha": 2.3,
+        "tile_id": "S2A_TILE_20260127_218962",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.981876,
+          5.4076
+        ]
+      },
+      "properties": {
+        "confidence": 0.693,
+        "district": "Tarkwa-Nsuaem",
+        "region": "Western Region",
+        "date": "2026-01-28",
+        "area_ha": 1.4,
+        "tile_id": "S2A_TILE_20260128_485424",
+        "alert_level": "LOW"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.028281,
+          5.691589
+        ]
+      },
+      "properties": {
+        "confidence": 0.921,
+        "district": "Wassa East",
+        "region": "Western Region",
+        "date": "2026-02-01",
+        "area_ha": 2.5,
+        "tile_id": "S2A_TILE_20260201_357105",
+        "alert_level": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.164003,
+          5.509888
+        ]
+      },
+      "properties": {
+        "confidence": 0.764,
+        "district": "Prestea-Huni Valley",
+        "region": "Western Region",
+        "date": "2026-01-26",
+        "area_ha": 1.6,
+        "tile_id": "S2A_TILE_20260126_648979",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.444752,
+          6.496637
+        ]
+      },
+      "properties": {
+        "confidence": 0.755,
+        "district": "Bibiani-Anhwiaso-Bekwai",
+        "region": "Western Region",
+        "date": "2026-01-28",
+        "area_ha": 1.6,
+        "tile_id": "S2A_TILE_20260128_152259",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.750814,
+          6.097351
+        ]
+      },
+      "properties": {
+        "confidence": 0.725,
+        "district": "Adansi South",
+        "region": "Ashanti Region",
+        "date": "2026-01-11",
+        "area_ha": 1.0,
+        "tile_id": "S2A_TILE_20260111_163684",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.940663,
+          6.358964
+        ]
+      },
+      "properties": {
+        "confidence": 0.849,
+        "district": "Amansie West",
+        "region": "Ashanti Region",
+        "date": "2026-02-01",
+        "area_ha": 1.6,
+        "tile_id": "S2A_TILE_20260201_254753",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.829805,
+          6.172627
+        ]
+      },
+      "properties": {
+        "confidence": 0.709,
+        "district": "Adansi South",
+        "region": "Ashanti Region",
+        "date": "2026-02-02",
+        "area_ha": 0.7,
+        "tile_id": "S2A_TILE_20260202_889783",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.421854,
+          6.532861
+        ]
+      },
+      "properties": {
+        "confidence": 0.62,
+        "district": "Bibiani-Anhwiaso-Bekwai",
+        "region": "Western Region",
+        "date": "2026-01-27",
+        "area_ha": 1.0,
+        "tile_id": "S2A_TILE_20260127_997240",
+        "alert_level": "LOW"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.994956,
+          5.552093
+        ]
+      },
+      "properties": {
+        "confidence": 0.805,
+        "district": "Wassa East",
+        "region": "Western Region",
+        "date": "2026-01-28",
+        "area_ha": 1.9,
+        "tile_id": "S2A_TILE_20260128_798090",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.902941,
+          6.159758
+        ]
+      },
+      "properties": {
+        "confidence": 0.707,
+        "district": "Birim North",
+        "region": "Eastern Region",
+        "date": "2026-01-30",
+        "area_ha": 1.4,
+        "tile_id": "S2A_TILE_20260130_437614",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.062926,
+          5.581919
+        ]
+      },
+      "properties": {
+        "confidence": 0.774,
+        "district": "Wassa East",
+        "region": "Western Region",
+        "date": "2026-01-24",
+        "area_ha": 1.2,
+        "tile_id": "S2A_TILE_20260124_676092",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.072391,
+          6.378747
+        ]
+      },
+      "properties": {
+        "confidence": 0.837,
+        "district": "Amansie West",
+        "region": "Ashanti Region",
+        "date": "2026-01-23",
+        "area_ha": 1.7,
+        "tile_id": "S2A_TILE_20260123_861053",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.836298,
+          6.100003
+        ]
+      },
+      "properties": {
+        "confidence": 0.602,
+        "district": "Adansi South",
+        "region": "Ashanti Region",
+        "date": "2026-01-21",
+        "area_ha": 0.8,
+        "tile_id": "S2A_TILE_20260121_841888",
+        "alert_level": "LOW"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.083627,
+          5.709641
+        ]
+      },
+      "properties": {
+        "confidence": 0.787,
+        "district": "Wassa East",
+        "region": "Western Region",
+        "date": "2026-01-27",
+        "area_ha": 1.6,
+        "tile_id": "S2A_TILE_20260127_565242",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.072496,
+          5.722297
+        ]
+      },
+      "properties": {
+        "confidence": 0.869,
+        "district": "Wassa East",
+        "region": "Western Region",
+        "date": "2026-01-23",
+        "area_ha": 1.2,
+        "tile_id": "S2A_TILE_20260123_977930",
+        "alert_level": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.114248,
+          5.673133
+        ]
+      },
+      "properties": {
+        "confidence": 0.749,
+        "district": "Wassa East",
+        "region": "Western Region",
+        "date": "2026-01-21",
+        "area_ha": 1.3,
+        "tile_id": "S2A_TILE_20260121_408204",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.067744,
+          5.595629
+        ]
+      },
+      "properties": {
+        "confidence": 0.62,
+        "district": "Wassa East",
+        "region": "Western Region",
+        "date": "2026-02-02",
+        "area_ha": 0.7,
+        "tile_id": "S2A_TILE_20260202_585703",
+        "alert_level": "LOW"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.79024,
+          6.18372
+        ]
+      },
+      "properties": {
+        "confidence": 0.767,
+        "district": "Adansi South",
+        "region": "Ashanti Region",
+        "date": "2026-01-26",
+        "area_ha": 0.8,
+        "tile_id": "S2A_TILE_20260126_939109",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.967276,
+          6.453492
+        ]
+      },
+      "properties": {
+        "confidence": 0.768,
+        "district": "Amansie West",
+        "region": "Ashanti Region",
+        "date": "2026-01-12",
+        "area_ha": 1.5,
+        "tile_id": "S2A_TILE_20260112_415855",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.868614,
+          5.392007
+        ]
+      },
+      "properties": {
+        "confidence": 0.78,
+        "district": "Tarkwa-Nsuaem",
+        "region": "Western Region",
+        "date": "2026-02-04",
+        "area_ha": 1.3,
+        "tile_id": "S2A_TILE_20260204_811903",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.000507,
+          5.676168
+        ]
+      },
+      "properties": {
+        "confidence": 0.615,
+        "district": "Wassa East",
+        "region": "Western Region",
+        "date": "2026-02-03",
+        "area_ha": 0.7,
+        "tile_id": "S2A_TILE_20260203_665256",
+        "alert_level": "LOW"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.559316,
+          6.287949
+        ]
+      },
+      "properties": {
+        "confidence": 0.7,
+        "district": "Obuasi",
+        "region": "Ashanti Region",
+        "date": "2026-01-21",
+        "area_ha": 0.4,
+        "tile_id": "S2A_TILE_20260121_762546",
+        "alert_level": "LOW"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.743968,
+          6.175443
+        ]
+      },
+      "properties": {
+        "confidence": 0.72,
+        "district": "Adansi South",
+        "region": "Ashanti Region",
+        "date": "2026-01-15",
+        "area_ha": 0.8,
+        "tile_id": "S2A_TILE_20260115_966169",
+        "alert_level": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.099774,
+          5.661845
+        ]
+      },
+      "properties": {
+        "confidence": 0.729,
+        "district": "Wassa East",
+        "region": "Western Region",
+        "date": "2026-02-03",
+        "area_ha": 1.3,
+        "tile_id": "S2A_TILE_20260203_821274",
+        "alert_level": "MEDIUM"
+      }
+    }
+  ]
+}
