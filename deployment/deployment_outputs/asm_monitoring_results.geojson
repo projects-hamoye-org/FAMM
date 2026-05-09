@@ -1,0 +1,62 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.4591335159953385,
+          5.173936710414797
+        ]
+      },
+      "properties": {
+        "confidence": 0.3112,
+        "district": "Komenda-edina-eguafo-abirem Municipal",
+        "region": "Central Region",
+        "date": "2026-02-16",
+        "area_ha": 501.76,
+        "tile_id": "Ghana_Composite_2026-02-16-0000010496-0000000000.tif",
+        "alert_level": "LOW"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.5396225654524476,
+          6.8009653530120735
+        ]
+      },
+      "properties": {
+        "confidence": 0.4567,
+        "district": "Kwabre East",
+        "region": "Ashanti Region",
+        "date": "2026-02-16",
+        "area_ha": 501.76,
+        "tile_id": "Ghana_Composite_2026-02-16-0000000000-0000000000.tif",
+        "alert_level": "LOW"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.0796851399832528,
+          5.355037071693292
+        ]
+      },
+      "properties": {
+        "confidence": 0.3009,
+        "district": "Mfantseman Municipal",
+        "region": "Central Region",
+        "date": "2026-02-16",
+        "area_ha": 501.76,
+        "tile_id": "Ghana_Composite_2026-02-16-0000010496-0000010496.tif",
+        "alert_level": "LOW"
+      }
+    }
+  ]
+}
