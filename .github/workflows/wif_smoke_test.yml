@@ -1,0 +1,69 @@
+name: WIF smoke test
+
+# Manual check that GitHub Actions can authenticate to famm-472015 through
+# Workload Identity Federation and use Earth Engine as the service account,
+# with no personal credentials involved.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write             # needed for Workload Identity Federation
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Authenticate to Google Cloud (Workload Identity Federation)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Earth Engine API
+        run: pip install earthengine-api==1.6.12 numpy==1.26.3
+
+      - name: Test Earth Engine access
+        run: |
+          python - << 'EOF'
+          import ee
+          import google.auth
+
+          creds, _ = google.auth.default(scopes=[
+              "https://www.googleapis.com/auth/earthengine",
+              "https://www.googleapis.com/auth/cloud-platform",
+          ])
+          ee.Initialize(credentials=creds, project="famm-472015")
+          print("1. Initialised as service account")
+
+          assert ee.Number(1).add(1).getInfo() == 2
+          print("2. getInfo works")
+
+          # Small Sentinel-2 pull near Tarkwa, same method the new export will use
+          point = ee.Geometry.Point([-1.99, 5.30])
+          img = (ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED")
+                 .filterBounds(point)
+                 .filterDate(ee.Date(ee.Date.now().advance(-60, "day")), ee.Date.now())
+                 .select(["B4", "B8"])
+                 .median())
+          arr = ee.data.computePixels({
+              "expression": img,
+              "fileFormat": "NUMPY_NDARRAY",
+              "grid": {
+                  "dimensions": {"width": 64, "height": 64},
+                  "affineTransform": {"scaleX": 10, "shearX": 0, "translateX": 611000,
+                                      "shearY": 0, "scaleY": -10, "translateY": 586000},
+                  "crsCode": "EPSG:32630",
+              },
+          })
+          print(f"3. computePixels works: {arr.shape}, bands {arr.dtype.names}")
+          print("All checks passed")
+          EOF
