@@ -34,6 +34,7 @@ jobs:
       - name: Test Earth Engine access
         run: |
           python - << 'EOF'
+          import datetime
           import ee
           import google.auth
 
@@ -51,7 +52,8 @@ jobs:
           point = ee.Geometry.Point([-1.99, 5.30])
           img = (ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED")
                  .filterBounds(point)
-                 .filterDate(ee.Date(ee.Date.now().advance(-60, "day")), ee.Date.now())
+                 .filterDate(str(datetime.date.today() - datetime.timedelta(days=60)),
+                             str(datetime.date.today()))
                  .select(["B4", "B8"])
                  .median())
           arr = ee.data.computePixels({
