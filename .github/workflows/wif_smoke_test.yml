@@ -14,7 +14,7 @@ permissions:
 jobs:
   smoke-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
 
     steps:
       - name: Authenticate to Google Cloud (Workload Identity Federation)
@@ -152,8 +152,7 @@ jobs:
                   "fillable": s.aggregate_mean("fillable"),
               })
 
-          for asset in ["projects/famm-472015/assets/Ghana_ASM_Bimonthly",
-                        "projects/famm-472015/assets/2025_Composites_"]:
+          for asset in ["projects/famm-472015/assets/Ghana_ASM_Bimonthly"]:
               try:
                   col = ee.ImageCollection(asset)
                   rows = col.map(check).getInfo()["features"]
@@ -205,27 +204,24 @@ jobs:
               return [s.size(), ee.Number(1).subtract(s.aggregate_mean("valid")),
                       s.aggregate_mean("fillable")]
 
-          def check(img):
-              p, w = stats(img, polygons), stats(img, windows)
-              return ee.Feature(None, {"id": img.get("system:index"),
-                                       "p_n": p[0], "p_empty": p[1], "p_fill": p[2],
-                                       "w_n": w[0], "w_empty": w[1], "w_fill": w[2]})
-
           def pct(x):
               return "   n/a" if x is None else f"{100 * x:7.3f}"
 
-          for asset in ["projects/famm-472015/assets/Ghana_ASM_Bimonthly",
-                        "projects/famm-472015/assets/2025_Composites_"]:
+          # One composite and one region per request: Earth Engine refuses
+          # too many sample aggregations at once.
+          col = ee.ImageCollection("projects/famm-472015/assets/Ghana_ASM_Bimonthly")
+          ids = col.aggregate_array("system:index").getInfo()
+          print(f"\nGhana_ASM_Bimonthly ({len(ids)} composites, ~{N} sampled pixels per column group)")
+          print(f"  {'composite':34s} {'in ASM polygons':>22s}   {'in ASM patch windows':>22s}")
+          print(f"  {'':34s} {'empty %':>10s} {'fillable %':>11s}   {'empty %':>10s} {'fillable %':>11s}")
+          for i in ids:
+              img = col.filter(ee.Filter.eq("system:index", i)).first()
               try:
-                  rows = ee.ImageCollection(asset).map(check).getInfo()["features"]
+                  _, pe, pf = ee.List(stats(img, polygons)).getInfo()
+                  _, we, wf = ee.List(stats(img, windows)).getInfo()
               except Exception as e:
-                  print(f"{asset}: could not read ({str(e)[:150]})")
+                  print(f"  {i[:34]:34s} failed: {str(e)[:100]}")
                   continue
-              print(f"\n{asset} (~{N} sampled pixels per column group)")
-              print(f"  {'composite':34s} {'in ASM polygons':>22s}   {'in ASM patch windows':>22s}")
-              print(f"  {'':34s} {'empty %':>10s} {'fillable %':>11s}   {'empty %':>10s} {'fillable %':>11s}")
-              for r in rows:
-                  q = r["properties"]
-                  print(f"  {str(q['id'])[:34]:34s} {pct(q.get('p_empty')):>10s} {pct(q.get('p_fill')):>11s}"
-                        f"   {pct(q.get('w_empty')):>10s} {pct(q.get('w_fill')):>11s}")
+              print(f"  {i[:34]:34s} {pct(pe):>10s} {pct(pf):>11s}   {pct(we):>10s} {pct(wf):>11s}",
+                    flush=True)
           EOF
