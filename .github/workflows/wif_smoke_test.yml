@@ -112,3 +112,61 @@ jobs:
           for k in out:
               print(f"  {k:38s} {float(arr[k][2, 2]):.0f}")
           EOF
+
+      - name: Count unfilled gaps in training/test composites
+        run: |
+          python - << 'EOF'
+          # For each published composite: what fraction of AOI pixels is empty,
+          # and how many empty pixels touch a valid neighbour (a working 3x3
+          # fill would have closed every one of those)?
+          import ee, google.auth
+          creds, _ = google.auth.default(scopes=[
+              "https://www.googleapis.com/auth/earthengine",
+              "https://www.googleapis.com/auth/cloud-platform",
+          ])
+          ee.Initialize(credentials=creds, project="famm-472015")
+
+          BANDS = ["B2", "B3", "B4", "B5", "B6", "B7", "B8", "B8A", "B11", "B12"]
+          # AOI from scraping/patch_extraction.py, shrunk 2 km so the
+          # composite's own outer edge is not counted as a gap.
+          aoi = ee.Geometry.Polygon([[
+              [-2.577107401987939, 6.5306601480568975], [-2.903948285164646, 6.2932353613892245],
+              [-2.9766815269095392, 6.08434089968068], [-2.90664378427828, 5.908201200818874],
+              [-2.8077586698808297, 5.711522903619994], [-2.4782606507938705, 5.339810442902648],
+              [-2.1734693858250353, 4.984296847965302], [-1.5720532810091514, 5.121001314357858],
+              [-0.9295708164086846, 5.421854403720199], [-1.436961333748421, 6.219931255643865],
+              [-1.3346584712677179, 6.530992048541554], [-1.415359587336964, 6.779274372062422],
+              [-1.6499660314807807, 6.831115397308761]]]).buffer(-2000)
+
+          N = 20000
+          def check(img):
+              valid = img.select(BANDS).mask().reduce(ee.Reducer.min()).gt(0)
+              fillable = valid.Not().And(valid.focal_max(1, "square", "pixels"))
+              s = (valid.rename("valid").addBands(fillable.rename("fillable"))
+                   .sample(region=aoi, scale=10, projection="EPSG:32630",
+                           numPixels=N, seed=0, dropNulls=False))
+              return ee.Feature(None, {
+                  "id": img.get("system:index"),
+                  "n": s.size(),
+                  "empty": ee.Number(1).subtract(s.aggregate_mean("valid")),
+                  "fillable": s.aggregate_mean("fillable"),
+              })
+
+          for asset in ["projects/famm-472015/assets/Ghana_ASM_Bimonthly",
+                        "projects/famm-472015/assets/2025_Composites_"]:
+              try:
+                  col = ee.ImageCollection(asset)
+                  rows = col.map(check).getInfo()["features"]
+              except Exception as e:
+                  print(f"{asset}: could not read ({str(e)[:150]})")
+                  continue
+              print(f"\n{asset} ({len(rows)} composites, ~{N} sampled pixels each)")
+              print(f"  {'composite':40s} {'empty %':>8s} {'fillable %':>11s}")
+              for r in rows:
+                  p = r["properties"]
+                  if p.get("empty") is None:
+                      print(f"  {str(p.get('id'))[:40]:40s} no pixels sampled")
+                      continue
+                  print(f"  {str(p['id'])[:40]:40s} {100 * p['empty']:8.3f} {100 * p['fillable']:11.3f}")
+          print("\nfillable % > 0 means gaps a working 3x3 fill would have closed are present.")
+          EOF

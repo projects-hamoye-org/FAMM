@@ -8,8 +8,14 @@ ee.Initialize(project="famm-472015")
 COUNTRY = "Ghana"
 
 # LOAD GHANA REGIONS (ADM1)
+# Restricted to the two AOI-intersecting regions not yet downloaded
+# (Ashanti, Central and Western already exported); remove this filter
+# to resume exporting all five AOI regions at once.
+REGIONS_TO_EXPORT = ['Brong Ahafo', 'Eastern']
+
 regions = ee.FeatureCollection("FAO/GAUL/2015/level1") \
-    .filter(ee.Filter.eq('ADM0_NAME', COUNTRY))
+    .filter(ee.Filter.eq('ADM0_NAME', COUNTRY)) \
+    .filter(ee.Filter.inList('ADM1_NAME', REGIONS_TO_EXPORT))
 
 region_list = regions.toList(regions.size())
 
@@ -87,7 +93,33 @@ for i in range(num_regions):
     monthly  = col_30.median()
 
     composite = weekly.unmask(biweekly).unmask(monthly)
-    composite = composite.unmask(0).clip(ROI)
+
+    # Spatial gap-fill for whatever is still masked after the 7/14/30-day
+    # temporal fallback, matching scraping/GEE/1TemporalMedianFiltering.js's
+    # buildMonthlyComposite() two-stage focal fill (3x3 mean, then 5x5
+    # median) instead of the previous composite.unmask(0). Zero-filling
+    # fabricated a value indistinguishable from real dark reflectance and
+    # let deployment_inference.py score it as if it were data; a focal
+    # fill instead estimates the missing pixel from its real neighbours,
+    # consistent with how every training/test composite is built. This is
+    # heavier (two region-wide focal passes per export, on top of the
+    # temporal chain above) but was requested specifically because zero
+    # is not an acceptable stand-in for missing data here.
+    # Radii are in pixels: 'meters' gave a 1-pixel kernel that filled nothing
+    # (checked in .github/workflows/wif_smoke_test.yml).
+    fill1 = composite.focal_mean(1, 'square', 'pixels')
+    composite = composite.unmask(fill1)
+    fill2 = composite.focal_median(2, 'square', 'pixels')
+    composite = composite.unmask(fill2)
+
+    # No blanket unmask(0): any pixel still masked after both the temporal
+    # and spatial fallbacks (expected to be rare, e.g. a location with no
+    # cloud-free observation anywhere in 30 days AND no valid neighbour
+    # within a 5x5 window) is exported as nodata rather than a fabricated
+    # zero. deployment_inference.py's sliding window must check for this
+    # (see its own validity-fraction guard) instead of assuming every
+    # exported tile is fully dense.
+    composite = composite.clip(ROI)
 
     EXPORT_NAME = f"{COUNTRY}_{region_name}_Composite_{today}"
 
