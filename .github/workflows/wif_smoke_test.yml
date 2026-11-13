@@ -69,3 +69,46 @@ jobs:
           print(f"3. computePixels works: {arr.shape}, bands {arr.dtype.names}")
           print("All checks passed")
           EOF
+
+      - name: Check focal gap-fill kernel size
+        run: |
+          python - << 'EOF'
+          # Does focal_mean(1, 'square', 'meters') / focal_median(2, ...) at
+          # 10 m behave as 3x3 / 5x5, as the paper states? Punch a hole in a
+          # constant image and see whether the fills close it.
+          import ee, google.auth
+          creds, _ = google.auth.default(scopes=[
+              "https://www.googleapis.com/auth/earthengine",
+              "https://www.googleapis.com/auth/cloud-platform",
+          ])
+          ee.Initialize(credentials=creds, project="famm-472015")
+
+          X, Y = 611000, 586000          # top-left of a 5x5 grid of 10 m pixels
+          def hole(n):                   # n x n hole centred on pixel (2, 2)
+              h = (n * 10 - 2) / 2
+              rect = ee.Geometry.Rectangle([X + 25 - h, Y - 25 - h, X + 25 + h, Y - 25 + h],
+                                           "EPSG:32630", False)
+              return ee.Image(1).paint(ee.FeatureCollection([ee.Feature(rect)]), 0)
+
+          img = ee.Image.constant(1).toFloat()
+          out = {}
+          for units in ["meters", "pixels"]:
+              a = img.updateMask(hole(1))
+              out[f"1px_hole_{units}_mean"] = a.unmask(a.focal_mean(1, "square", units)).mask()
+              b = img.updateMask(hole(3))
+              b1 = b.unmask(b.focal_mean(1, "square", units))
+              out[f"3px_hole_{units}_mean"] = b1.mask()
+              out[f"3px_hole_{units}_mean_then_median"] = b1.unmask(b1.focal_median(2, "square", units)).mask()
+          stack = ee.Image.cat([v.rename(k) for k, v in out.items()])
+          arr = ee.data.computePixels({
+              "expression": stack, "fileFormat": "NUMPY_NDARRAY",
+              "grid": {"dimensions": {"width": 5, "height": 5},
+                       "affineTransform": {"scaleX": 10, "shearX": 0, "translateX": X,
+                                           "shearY": 0, "scaleY": -10, "translateY": Y},
+                       "crsCode": "EPSG:32630"},
+          })
+          print("Centre pixel filled? (1 = yes, 0 = no)")
+          print("Expected for true 3x3 mean / 5x5 median: 1px_mean=1, 3px_mean=0, 3px_mean_then_median=1")
+          for k in out:
+              print(f"  {k:38s} {float(arr[k][2, 2]):.0f}")
+          EOF

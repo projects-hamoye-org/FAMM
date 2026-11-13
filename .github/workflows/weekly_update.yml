@@ -1,0 +1,84 @@
+name: Weekly ASM Detection
+
+on:
+  schedule:
+    - cron: "0 20 * * 6"    # 8 PM UTC = 9 PM WAT, every Saturday
+  workflow_dispatch:
+    inputs:
+      regions:
+        description: 'Limit to these GAUL regions, comma-separated (e.g. "Western,Central"). Blank = all 10 regions'
+        required: false
+        default: ''
+        type: string
+      commit_results:
+        description: 'Commit detections to the dashboard'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+permissions:
+  contents: write             # push the updated GeoJSON
+  id-token: write             # Workload Identity Federation
+
+concurrency:
+  group: weekly-detection
+  cancel-in-progress: false
+
+jobs:
+  detect-and-update:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          pip install torch==2.1.0 torchvision==0.16.0 \
+            --index-url https://download.pytorch.org/whl/cpu
+          pip install \
+            earthengine-api==1.6.12 \
+            google-auth==2.41.1 \
+            geopandas==1.1.2 \
+            shapely==2.1.2 \
+            numpy==1.26.3
+
+      - name: Authenticate to Google Cloud (Workload Identity Federation)
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+
+      - name: Fetch composites and run inference
+        env:
+          REGIONS: ${{ github.event.inputs.regions }}
+        run: python pipeline/weekly_detect.py --regions "$REGIONS"
+
+      - name: Validate and append to dashboard GeoJSON
+        run: |
+          python pipeline/validate_geojson.py \
+            asm_monitoring_results.geojson \
+            data/geojson/latest_detections.geojson
+
+      - name: Commit updated detections
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.commit_results == 'true' }}
+        run: |
+          git config user.name  "FAMM Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/geojson/latest_detections.geojson
+          if git diff --staged --quiet; then
+            echo "No change in detections this week."
+          else
+            git commit -m "chore: weekly detection update $(date -u '+%Y-%m-%d')"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
