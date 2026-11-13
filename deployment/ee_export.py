@@ -95,18 +95,14 @@ for i in range(num_regions):
     composite = weekly.unmask(biweekly).unmask(monthly)
 
     # Spatial gap-fill for whatever is still masked after the 7/14/30-day
-    # temporal fallback, matching scraping/GEE/1TemporalMedianFiltering.js's
-    # buildMonthlyComposite() two-stage focal fill (3x3 mean, then 5x5
-    # median) instead of the previous composite.unmask(0). Zero-filling
+    # temporal fallback, instead of the previous composite.unmask(0). Zero-filling
     # fabricated a value indistinguishable from real dark reflectance and
     # let deployment_inference.py score it as if it were data; a focal
-    # fill instead estimates the missing pixel from its real neighbours,
-    # consistent with how every training/test composite is built. This is
+    # fill instead estimates the missing pixel from its real neighbours.
+    # This is
     # heavier (two region-wide focal passes per export, on top of the
     # temporal chain above) but was requested specifically because zero
     # is not an acceptable stand-in for missing data here.
-    # Radii are in pixels: 'meters' gave a 1-pixel kernel that filled nothing
-    # (checked in .github/workflows/wif_smoke_test.yml).
     fill1 = composite.focal_mean(1, 'square', 'pixels')
     composite = composite.unmask(fill1)
     fill2 = composite.focal_median(2, 'square', 'pixels')

@@ -123,6 +123,15 @@ function buildMonthlyComposite(yearNum, monthNum) {
   var median = windowCol.median();
   median = ee.Image(safeSelectBands(median)); // ensures desired bandnames or a nodata placeholder
   
+  // NOTE (Nov 2026): the radii below are in 'meters', so on 10 m pixels each
+  // kernel is a single pixel and neither pass fills anything. This is the code
+  // that produced the published composites (Ghana_ASM_Bimonthly, 2025), so it
+  // is left unchanged as a record of what was run. Because the fill never ran,
+  // some pixels stayed empty, but very few: at most 0.055% of the study area
+  // in any one monthly composite (March 2021), and none in most months. The
+  // 3x3 mean / 5x5 median the paper describes needs 'pixels' units, as used in
+  // deployment/ee_export.py and pipeline/weekly_detect.py.
+  //
   // If median contains fully masked pixels (holes), apply small spatial fills:
   // 1) perform a focal mean (3x3) to fill single-pixel holes, then use it to unmask.
   // 2) perform a second pass focal median (5x5) for slightly larger gaps.

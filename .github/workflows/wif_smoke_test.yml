@@ -170,3 +170,62 @@ jobs:
                   print(f"  {str(p['id'])[:40]:40s} {100 * p['empty']:8.3f} {100 * p['fillable']:11.3f}")
           print("\nfillable % > 0 means gaps a working 3x3 fill would have closed are present.")
           EOF
+
+      - name: Count unfilled gaps at ASM sites
+        run: |
+          python - << 'EOF'
+          # Same measure as above, but only (a) inside the 715 ASM polygons and
+          # (b) inside the 2.56 km patch windows cut around them, i.e. the
+          # pixels the model saw as positives. Checks whether gaps cluster on
+          # mining sites (e.g. ponds mistaken for cloud).
+          import ee, google.auth
+          creds, _ = google.auth.default(scopes=[
+              "https://www.googleapis.com/auth/earthengine",
+              "https://www.googleapis.com/auth/cloud-platform",
+          ])
+          ee.Initialize(credentials=creds, project="famm-472015")
+
+          BANDS = ["B2", "B3", "B4", "B5", "B6", "B7", "B8", "B8A", "B11", "B12"]
+          asm = (ee.FeatureCollection("projects/famm-472015/assets/Ghana_ASM_Dataset_WithForestReserves")
+                 .filter(ee.Filter.eq("label", 1)))
+          print(f"ASM features: {asm.size().getInfo()}")
+          polygons = asm.geometry().dissolve(10)
+          # Patch windows as in scraping/patch_extraction.py: centroid buffered
+          # by 1,280 m, bounding square.
+          windows = asm.map(lambda f: f.setGeometry(
+              f.geometry().centroid(1).buffer(1280).bounds(1))).geometry().dissolve(10)
+
+          N = 20000
+          def stats(img, region):
+              valid = img.select(BANDS).mask().reduce(ee.Reducer.min()).gt(0)
+              fillable = valid.Not().And(valid.focal_max(1, "square", "pixels"))
+              s = (valid.rename("valid").addBands(fillable.rename("fillable"))
+                   .sample(region=region, scale=10, projection="EPSG:32630",
+                           numPixels=N, seed=0, dropNulls=False))
+              return [s.size(), ee.Number(1).subtract(s.aggregate_mean("valid")),
+                      s.aggregate_mean("fillable")]
+
+          def check(img):
+              p, w = stats(img, polygons), stats(img, windows)
+              return ee.Feature(None, {"id": img.get("system:index"),
+                                       "p_n": p[0], "p_empty": p[1], "p_fill": p[2],
+                                       "w_n": w[0], "w_empty": w[1], "w_fill": w[2]})
+
+          def pct(x):
+              return "   n/a" if x is None else f"{100 * x:7.3f}"
+
+          for asset in ["projects/famm-472015/assets/Ghana_ASM_Bimonthly",
+                        "projects/famm-472015/assets/2025_Composites_"]:
+              try:
+                  rows = ee.ImageCollection(asset).map(check).getInfo()["features"]
+              except Exception as e:
+                  print(f"{asset}: could not read ({str(e)[:150]})")
+                  continue
+              print(f"\n{asset} (~{N} sampled pixels per column group)")
+              print(f"  {'composite':34s} {'in ASM polygons':>22s}   {'in ASM patch windows':>22s}")
+              print(f"  {'':34s} {'empty %':>10s} {'fillable %':>11s}   {'empty %':>10s} {'fillable %':>11s}")
+              for r in rows:
+                  q = r["properties"]
+                  print(f"  {str(q['id'])[:34]:34s} {pct(q.get('p_empty')):>10s} {pct(q.get('p_fill')):>11s}"
+                        f"   {pct(q.get('w_empty')):>10s} {pct(q.get('w_fill')):>11s}")
+          EOF

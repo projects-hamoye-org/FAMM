@@ -138,8 +138,7 @@ def build_composite(tile_roi, region_geom, today):
                  .unmask(collection(30).median()))
 
     # 3x3 mean then 5x5 median, as the paper states. Radii are in pixels: the
-    # earlier 'meters' units gave a 1-pixel kernel that filled nothing
-    # (checked in .github/workflows/wif_smoke_test.yml).
+    # earlier 'meters' units gave a 1-pixel kernel that filled nothing.
     composite = composite.unmask(composite.focal_mean(1, "square", "pixels"))
     composite = composite.unmask(composite.focal_median(2, "square", "pixels"))
     composite = composite.clip(region_geom)
